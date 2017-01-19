@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Triangle",
+        "entry": "triangle.js",
+    },
+    {
+        "title": "Triangle Color",
+        "entry": "triangle-color.js",
+    },
+    {
+        "title": "Triangle Textured",
+        "entry": "triangle-textured.js",
+    }
+]
