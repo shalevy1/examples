@@ -263,7 +263,11 @@ jQuery(document).ready(function($) {
         var js = bpc.jsSource;
         var pixiUrl = '';
 
+		var isLocal = bpc.version.substr(0, 5) === 'local';
         // pull v3 from github cdn
+		if (isLocal) {
+			pixiUrl = "dist/pixi.js"
+		} else
         if (bpc.version.substr(0, 2) === 'v3') {
             pixiUrl = 'https://cdn.rawgit.com/GoodBoyDigital/pixi.js/' + bpc.version + '/bin/pixi.js';
         }
@@ -277,9 +281,21 @@ jQuery(document).ready(function($) {
         html += '<script src="' + pixiUrl + '"></script>';
 
         var plugins = bpc.plugins === '' ? [] : bpc.plugins.split(',');
-        for (i=0; i < plugins.length; i++) {
-            html += '<script src="required/plugins/'+plugins[0]+'.js"></script>';
-        }
+
+		if (!isLocal) {
+			if (bpc.version !== "release" && bpc.version !== "dev") {
+                html += '<script src="required/plugins/pixi-legacy.js"></script>';
+			}
+			for (i=0; i < plugins.length; i++) {
+                html += '<script src="required/plugins/'+plugins[0]+'.js"></script>';
+            }
+		} else {
+			for (i=0; i < plugins.length; i++) {
+				html += '<script src="dist/plugins/'+plugins[0]+'.js"></script>';
+			}
+		}
+ 
+
 
         html += '<script>window.onload = function(){'+js+'}</script></body></html>';
 
