@@ -24,7 +24,7 @@ var geometry = new PIXI.mesh.Geometry()
                1, 1], // u, v
                2)        // the size of the attribute
 
-var shader = new PIXI.Shader(`
+var vertexSrc = `
 
     precision mediump float;
 
@@ -44,9 +44,11 @@ var shader = new PIXI.Shader(`
         vColor = aColor;
         gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
 
-    }`,
+    }`
 
-    `precision mediump float;
+var fragmentSrc = `
+
+    precision mediump float;
 
     varying vec3 vColor;
     varying vec2 vUvs;
@@ -56,15 +58,13 @@ var shader = new PIXI.Shader(`
     void main() {
 
         gl_FragColor = texture2D(uSampler2, vUvs) * vec4(vColor, 1.0);
-    }
+    }`
 
-`)
+var uniforms = { uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg') };
 
-var uniforms = {
-  uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-}
+var shader = new PIXI.Shader.from(vertexSrc, fragmentSrc, uniforms);
 
-var triangle = new PIXI.mesh.RawMesh(geometry, shader, uniforms);
+var triangle = new PIXI.mesh.RawMesh(geometry, shader);
 
 triangle.position.set(400, 300);
 triangle.scale.set(2);

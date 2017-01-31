@@ -18,7 +18,7 @@ var geometry = new PIXI.mesh.Geometry()
                0, 0, 1], // r, g, b
                3)        // the size of the attribute
 
-var shader = new PIXI.Shader(`
+var shader = new PIXI.Shader.from(`
 
     precision mediump float;
     attribute vec2 aVertexPosition;

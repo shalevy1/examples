@@ -18,7 +18,7 @@ var geometry = new PIXI.mesh.Geometry()
                1, 1], // u, v
                2)        // the size of the attribute
 
-var shader = new PIXI.Shader(`
+var program = new PIXI.Program.from(`
 
     precision mediump float;
 
@@ -41,26 +41,26 @@ var shader = new PIXI.Shader(`
 
     varying vec2 vUvs;
 
-    uniform sampler2D uSampler2;
+    uniform sampler2D uSamplerTexture;
 
     void main() {
 
-        gl_FragColor = texture2D(uSampler2, vUvs);
+        gl_FragColor = texture2D(uSamplerTexture, vUvs);
     }
 
 `)
 
-var triangle = new PIXI.mesh.RawMesh(geometry, shader, {
-  uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-});
+var triangle = new PIXI.mesh.RawMesh(geometry, new PIXI.Shader(program, {
+  uSamplerTexture:PIXI.Texture.from('required/assets/SceneRotate.jpg')
+}));
 
-var triangle2 = new PIXI.mesh.RawMesh(geometry, shader, {
-  uSampler2:PIXI.Texture.from('required/assets/BGrotate.jpg')
-});
+var triangle2 = new PIXI.mesh.RawMesh(geometry, new PIXI.Shader(program, {
+  uSamplerTexture:PIXI.Texture.from('required/assets/BGrotate.jpg')
+}));
 
-var triangle3 = new PIXI.mesh.RawMesh(geometry, shader, {
-  uSampler2:PIXI.Texture.from('required/assets/displacement_BG.jpg')
-});
+var triangle3 = new PIXI.mesh.RawMesh(geometry, new PIXI.Shader(program, {
+  uSamplerTexture:PIXI.Texture.from('required/assets/displacement_BG.jpg')
+}));
 
 triangle.position.set(400, 300);
 triangle.scale.set(2);

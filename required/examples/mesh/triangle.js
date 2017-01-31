@@ -8,7 +8,7 @@ var stage = new PIXI.Container();
 var geometry = new PIXI.mesh.Geometry()
 .addAttribute('aVertexPosition', [-100, -50, 100, -50, 0, 100])
 
-var shader = new PIXI.Shader(`
+var shader = new PIXI.Shader.from(`
 
     precision mediump float;
     attribute vec2 aVertexPosition;

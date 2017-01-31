@@ -16,7 +16,7 @@ var geometry = new PIXI.mesh.Geometry()
                1, 0,  // u, v
                1, 1]) // u, v
 
-var shader = new PIXI.Shader(`
+var shader = new PIXI.Shader.from(`
 
     precision mediump float;
 
@@ -46,9 +46,12 @@ var shader = new PIXI.Shader(`
         gl_FragColor = texture2D(uSampler2, vUvs);
     }
 
-`)
+`,
+{
+    uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
+})
 
-var shader2 = new PIXI.Shader(`
+var shader2 = new PIXI.Shader.from(`
 
     precision mediump float;
 
@@ -80,23 +83,24 @@ var shader2 = new PIXI.Shader(`
         gl_FragColor.g += (abs(cos(gl_FragCoord.y * 0.06)) * 0.5) * 2.;
     }
 
-`)
-var triangle = new PIXI.mesh.RawMesh(geometry, shader, {
+`,
+{
   uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-});
+})
 
 
-var triangle3 = new PIXI.mesh.RawMesh(geometry, shader2, {
-  uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-});
+var triangle = new PIXI.mesh.RawMesh(geometry, shader);
+
+
+var triangle2 = new PIXI.mesh.RawMesh(geometry, shader2);
 
 triangle.position.set(400, 300);
 triangle.scale.set(2);
 
-triangle3.position.set(500, 400);
-triangle3.scale.set(3);
+triangle2.position.set(500, 400);
+triangle2.scale.set(3);
 
-stage.addChild(triangle3, triangle);
+stage.addChild(triangle2, triangle);
 
 // start the animation..
 requestAnimationFrame(animate);
@@ -106,5 +110,5 @@ function animate()
     requestAnimationFrame(animate);
     renderer.render(stage);
     triangle.rotation += 0.01;
-    triangle3.rotation -= 0.005;
+    triangle2.rotation -= 0.005;
 }

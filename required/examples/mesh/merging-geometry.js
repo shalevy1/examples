@@ -35,7 +35,7 @@ var geometry2 = new PIXI.mesh.Geometry()
 
 var geometry3 = PIXI.mesh.Geometry.merge([geometry, geometry2]);
 
-var shader = new PIXI.Shader(`
+var shader = new PIXI.Shader.from(`
 
     precision mediump float;
 
@@ -65,13 +65,12 @@ var shader = new PIXI.Shader(`
         gl_FragColor = texture2D(uSampler2, vUvs );
     }
 
-`)
-
-var uniforms = {
+`,
+{
   uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-}
+})
 
-var quad = new PIXI.mesh.RawMesh(geometry3, shader, uniforms);
+var quad = new PIXI.mesh.RawMesh(geometry3, shader);
 
 quad.position.set(400, 300);
 quad.scale.set(2);

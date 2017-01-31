@@ -20,7 +20,7 @@ var geometry = new PIXI.mesh.Geometry()
                2)        // the size of the attribute
 .addIndex([0, 1, 2, 0, 2, 3]);
 
-var shader = new PIXI.Shader(`
+var vertexSrc = `
 
     precision mediump float;
 
@@ -37,9 +37,11 @@ var shader = new PIXI.Shader(`
         vUvs = aUvs;
         gl_Position = vec4((projectionMatrix * translationMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);
 
-    }`,
+    }`
 
-    `precision mediump float;
+var fragmentSrc = `
+
+    precision mediump float;
 
     varying vec2 vUvs;
 
@@ -49,14 +51,16 @@ var shader = new PIXI.Shader(`
     void main() {
 
         gl_FragColor = texture2D(uSampler2, vUvs + sin( (time + (vUvs.x) * 14.) ) * 0.1 );
-    }
-
-`)
+    }`
 
 var uniforms = {
-  uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg'),
-  time:0
+    uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg'),
+    time:0
 }
+
+var uniforms = { uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg') };
+
+var shader = new PIXI.Shader.from(vertexSrc, fragmentSrc, uniforms);
 
 var quad = new PIXI.mesh.RawMesh(geometry, shader, uniforms);
 
@@ -73,5 +77,5 @@ function animate()
     requestAnimationFrame(animate);
     renderer.render(stage);
     quad.rotation += 0.01;
-    quad.uniforms.time += 0.1
+    quad.shader.uniforms.time += 0.1
 }
