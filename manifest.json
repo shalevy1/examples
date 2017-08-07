@@ -199,6 +199,13 @@
             "plugins": [
                 "pixi-projection"
             ]
+        },
+        {
+            "title": "Strange",
+            "entry": "strange.js",
+            "plugins": [
+                "pixi-projection"
+            ]
         }
     ],
     "spine": [
