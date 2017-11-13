@@ -128,6 +128,31 @@
             ]
         }
     ],
+    "heaven": [
+        {
+            "title": "Alpha Mask",
+            "entry": "alpha-mask.js",
+            "plugins": [
+                "pixi-heaven"
+            ]
+        },
+        {
+            "title": "Walking Animation",
+            "entry": "spineboy.js",
+            "plugins": [
+                "pixi-spine",
+                "pixi-heaven"
+            ]
+        },
+        {
+            "title": "Dragon",
+            "entry": "dragon.js",
+            "plugins": [
+                "pixi-spine",
+                "pixi-heaven"
+            ]
+        }
+    ],
     "filters": [
         {
             "title": "Filter",
@@ -151,6 +176,10 @@
         {
             "title": "Displacement Map",
             "entry": "displacement-map.js"
+        },
+        {
+            "title": "Displacement Draw",
+            "entry": "displacement-draw.js"
         }
     ],
     "picture": [
@@ -205,6 +234,13 @@
             "entry": "quad-bi.js",
             "plugins": [
                 "pixi-projection"
+            ]
+        },
+        {
+            "title": "Quad spine",
+            "entry": "quad-spine.js",
+            "plugins": [
+                "pixi-projection-spine"
             ]
         }
     ],
