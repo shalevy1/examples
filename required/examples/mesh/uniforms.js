@@ -58,7 +58,7 @@ var uniforms = { uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg') 
 
 var shader = new PIXI.Shader.from(vertexSrc, fragmentSrc, uniforms);
 
-var quad = new PIXI.mesh.RawMesh(geometry, shader, uniforms);
+var quad = new PIXI.RawMesh(geometry, shader, uniforms);
 
 quad.position.set(400, 300);
 quad.scale.set(2);

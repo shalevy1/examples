@@ -24,7 +24,7 @@ var shader = new PIXI.Shader.from(`
 
 `)
 
-var triangle = new PIXI.mesh.RawMesh(geometry, shader);
+var triangle = new PIXI.RawMesh(geometry, shader);
 
 triangle.position.set(400, 300);
 

@@ -85,10 +85,10 @@ var shader2 = new PIXI.Shader.from(`
 })
 
 
-var triangle = new PIXI.mesh.RawMesh(geometry, shader);
+var triangle = new PIXI.RawMesh(geometry, shader);
 
 
-var triangle2 = new PIXI.mesh.RawMesh(geometry, shader2);
+var triangle2 = new PIXI.RawMesh(geometry, shader2);
 
 triangle.position.set(400, 300);
 triangle.scale.set(2);
