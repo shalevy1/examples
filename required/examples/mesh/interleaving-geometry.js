@@ -1,11 +1,7 @@
-var renderer = PIXI.autoDetectRenderer(800, 600);
-document.body.appendChild(renderer.view);
+var app = new PIXI.Application(800, 600);
+document.body.appendChild(app.view);
 
-// create the root of the scene graph
-var stage = new PIXI.Container();
-
-
-var geometry = new PIXI.mesh.Geometry()
+var geometry = new PIXI.Geometry()
 .addAttribute('aVertexPosition',  // the attribute name
               [-100, -100,   // x, y
                 100, -100,   // x, y
@@ -54,21 +50,15 @@ var shader = new PIXI.Shader.from(`
 `,
 {
   uSampler2:PIXI.Texture.from('required/assets/SceneRotate.jpg')
-})
+});
 
 var quad = new PIXI.mesh.RawMesh(geometry, shader);
 
 quad.position.set(400, 300);
 quad.scale.set(2);
 
-stage.addChild(quad);
+app.stage.addChild(quad);
 
-// start the animation..
-requestAnimationFrame(animate);
-
-function animate()
-{
-    requestAnimationFrame(animate);
-    renderer.render(stage);
+app.ticker.add(function(delta) {
     quad.rotation += 0.01;
-}
+});

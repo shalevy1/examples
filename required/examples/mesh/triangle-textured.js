@@ -1,11 +1,7 @@
-var renderer = PIXI.autoDetectRenderer(800, 600);
-document.body.appendChild(renderer.view);
+var app = new PIXI.Application(800, 600);
+document.body.appendChild(app.view);
 
-// create the root of the scene graph
-var stage = new PIXI.Container();
-
-
-var geometry = new PIXI.mesh.Geometry()
+var geometry = new PIXI.Geometry()
 .addAttribute('aVertexPosition',  // the attribute name
               [-100, -100,   // x, y
                 100, -100,   // x, y
@@ -69,14 +65,8 @@ var triangle = new PIXI.mesh.RawMesh(geometry, shader);
 triangle.position.set(400, 300);
 triangle.scale.set(2);
 
-stage.addChild(triangle);
+app.stage.addChild(triangle);
 
-// start the animation..
-requestAnimationFrame(animate);
-
-function animate()
-{
-    requestAnimationFrame(animate);
-    renderer.render(stage);
+app.ticker.add(function(delta) {
     triangle.rotation += 0.01;
-}
+});
